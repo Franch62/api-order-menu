@@ -1,0 +1,19 @@
+{
+  "name": "teste-classes-api",
+  "version": "1.0.0",
+  "description": "teste com classes api",
+  "main": "index.js",
+  "engines":{
+    "node": "14.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francisco Rodrigues",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.2"
+  }
+}
