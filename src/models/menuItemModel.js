@@ -4,14 +4,18 @@ const menuItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image_url: { type: String, required: true },
-  value: { type: String, required: true },
-  isCrepeSalgado: { type: Boolean },
-  isCrepeDoce: { type: Boolean },
-  isCuscuz: { type: Boolean },
-  isNaturalsnack: { type: Boolean },
-  isGarapa: { type: Boolean },
-  isJuice: { type: Boolean },
-  isSuco: { type: Boolean },
+  price: { type: String, required: true },
+  categories: {
+    type: [String],
+    enum: [
+      "CrepeSalgado",
+      "CrepeDoce",
+      "Cuscuz",
+      "LancheNatural",
+      "Garapa",
+      "Suco",
+    ], required: true,
+  },
 });
 
 class MenuItemModel {
@@ -21,6 +25,10 @@ class MenuItemModel {
 
   async getAll() {
     return await this.MenuItem.find();
+  }
+
+  async getById(id){
+    return await this.MenuItem.findOne();
   }
 
   async create(data) {

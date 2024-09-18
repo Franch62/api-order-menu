@@ -19,6 +19,15 @@ class MenuController {
     }
   }
 
+  async getMenuItemById(req, res) {
+    try {
+      const item = await menuItemModel.getById();
+      res.send(item);
+    } catch (error) {
+      res.status(500).send("Erro ao buscar item.");
+    }
+  }
+
   async updateMenuItem(req, res) {
     try {
       const updatedItem = await menuItemModel.update(req.params.id, req.body);

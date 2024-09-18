@@ -9,6 +9,7 @@ class MenuRoutes {
 
   setupRoutes() {
     this.router.get("/", menuController.getMenuItems);
+    this.router.get("/:id", menuController.getMenuItemById);
     this.router.post("/", menuController.createMenuItem);
     this.router.put("/:id", menuController.updateMenuItem);
     this.router.delete("/:id", menuController.deleteMenuItem);
