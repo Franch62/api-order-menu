@@ -1,20 +1,16 @@
 const mongoose = require("mongoose");
+const categorySchema = require("./categoryModel");
+const Category = categorySchema.Category;
 
 const menuItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image_url: { type: String, required: true },
   price: { type: String, required: true },
-  categories: {
-    type: [String],
-    enum: [
-      "CrepeSalgado",
-      "CrepeDoce",
-      "Cuscuz",
-      "LancheNatural",
-      "Garapa",
-      "Suco",
-    ], required: true,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Category,
+    required: true,
   },
 });
 
@@ -24,11 +20,11 @@ class MenuItemModel {
   }
 
   async getAll() {
-    return await this.MenuItem.find();
+    return await this.MenuItem.find().populate("category");
   }
 
-  async getById(id){
-    return await this.MenuItem.findOne();
+  async getById(id) {
+    return await this.MenuItem.findOne().populate("category");
   }
 
   async create(data) {
