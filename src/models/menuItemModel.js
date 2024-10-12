@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const categorySchema = require("./categoryModel");
-const Category = categorySchema.Category;
 
 const menuItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,7 +8,7 @@ const menuItemSchema = new mongoose.Schema({
   price: { type: String, required: true },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Category,
+    ref: "Category", // Corrigir referência para o nome correto
     required: true,
   },
 });
@@ -24,7 +23,7 @@ class MenuItemModel {
   }
 
   async getById(id) {
-    return await this.MenuItem.findOne().populate("category");
+    return await this.MenuItem.findById(id).populate("category"); // Corrigir para usar findById
   }
 
   async create(data) {
