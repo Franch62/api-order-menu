@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  cnpj: { type: Number, required: true },
-  address: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 
@@ -16,8 +15,12 @@ class UserModel {
     return await this.User.find();
   }
 
+  async getByEmail(email) {
+    return await this.User.findOne({ email });
+  }
+
   async getById(id) {
-    return await this.User.findOne();
+    return await this.User.findOne(id);
   }
 
   async create(data) {
@@ -33,5 +36,6 @@ class UserModel {
     return await this.User.findByIdAndDelete(id);
   }
 }
+
 
 module.exports = new UserModel();

@@ -21,7 +21,7 @@ class UserController {
 
   async getUserById(req, res) {
     try {
-      const user = await userModel.getById();
+      const user = await userModel.getById(req.params.id);
       res.send(user);
     } catch (error) {
       res.status(500).send("Erro ao buscar Usuário.");

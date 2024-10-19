@@ -6,6 +6,7 @@ const path = require("path");
 const menuRoutes = require("./src/routes/menuRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const categoryRoutes = require("./src/routes/categoryRoutes");
+const authRoutes = require("./src/routes/authRoutes");
 
 
 class App {
@@ -28,6 +29,7 @@ class App {
 
     router.use("/menu", menuRoutes);
     router.use('/uploads', express.static('uploads'));
+    router.use("/auth", authRoutes);
     router.use("/users", userRoutes);
     router.use("/categories", categoryRoutes);
   }
