@@ -6,14 +6,12 @@ const path = require("path");
 // Configurando o armazenamento de arquivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Define o diretório de uploads
+    cb(null, "uploads");
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(
-      null,
-      file.fieldname + "-" + uniqueSuffix + "." + file.mimetype.split("/")[1]
-    ); // Nome único para o arquivo
+    const fileExtension = file.mimetype.split("/")[1]; // Extraindo a extensão do arquivo
+    cb(null, uniqueSuffix + "." + fileExtension); // Nome sem o prefixo do campo
   },
 });
 

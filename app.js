@@ -27,7 +27,7 @@ class App {
     this.app.use("/v1", router);
 
     router.use("/menu", menuRoutes);
-    router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+    router.use('/uploads', express.static('uploads'));
     router.use("/users", userRoutes);
     router.use("/categories", categoryRoutes);
   }

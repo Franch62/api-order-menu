@@ -15,9 +15,9 @@ class MenuController {
       const imageUrl = req.file ? req.file.path : null;
       const menuItemData = {
         ...req.body,
-        image_url: imageUrl, // Adiciona o caminho da imagem
+        image_url: imageUrl,
       };
-      const menuItem = await menuItemModel.create(menuItemData); // Criar com menuItemData
+      const menuItem = await menuItemModel.create(menuItemData);
       res.send(menuItem);
     } catch (error) {
       console.error(error);
@@ -39,10 +39,13 @@ class MenuController {
       const imageUrl = req.file ? req.file.path : null;
       const menuItemData = {
         ...req.body,
-        image_url: imageUrl, // Adiciona o caminho da imagem
+        image_url: imageUrl,
       };
 
-      const updatedItem = await menuItemModel.update(req.params.id, menuItemData); // Usar update
+      const updatedItem = await menuItemModel.update(
+        req.params.id,
+        menuItemData
+      );
 
       res.status(200).json({
         message: `${updatedItem.name} atualizado com sucesso.`,
@@ -58,13 +61,15 @@ class MenuController {
     try {
       // Primeiro, busque o item para obter o caminho da imagem
       const itemToDelete = await menuItemModel.getById(req.params.id);
-      
-      // Exclua o item do banco de dados
       const deletedItem = await menuItemModel.delete(req.params.id);
-      
+
       // Se o item foi deletado e tem uma imagem, exclua a imagem do sistema de arquivos
       if (deletedItem && itemToDelete.image_url) {
-        const imagePath = path.join(__dirname, '../../', itemToDelete.image_url);
+        const imagePath = path.join(
+          __dirname,
+          "../../",
+          itemToDelete.image_url
+        );
         fs.unlink(imagePath, (err) => {
           if (err) {
             console.error("Erro ao excluir a imagem:", err);
@@ -73,16 +78,15 @@ class MenuController {
           }
         });
       }
-      
+
       res.send(`${deletedItem.name} excluído com sucesso.`);
     } catch (error) {
       res.status(500).send("Erro ao excluir o item.");
     }
-    } catch (error) {
-      res.status(500).send("Erro ao excluir o item.");
-    }
   }
-
-
+  catch(error) {
+    res.status(500).send("Erro ao excluir o item.");
+  }
+}
 
 module.exports = new MenuController();
