@@ -25,7 +25,7 @@ class App {
 
   setupRoutes() {
     const router = express.Router();
-    this.app.use("/v1", router);
+    this.app.use("/api", router);
 
     router.use("/menu", menuRoutes);
     router.use('/uploads', express.static('uploads'));
