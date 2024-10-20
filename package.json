@@ -2,7 +2,7 @@
   "name": "teste-classes-api",
   "version": "1.0.0",
   "description": "teste com classes api",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "20.x"
   },
