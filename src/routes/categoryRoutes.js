@@ -1,5 +1,6 @@
 const express = require("express");
 const categoryController = require("../controllers/categoryController");
+const verifyToken = require("../middlewares/authMiddleware");
 
 class CategoryRoutes {
   constructor() {
@@ -8,11 +9,11 @@ class CategoryRoutes {
   }
 
   setupRoutes() {
-    this.router.get("/", categoryController.getCategories);
-    this.router.get("/:id", categoryController.getCategoryById);
-    this.router.post("/", categoryController.createCategory);
-    this.router.put("/:id", categoryController.updateCategory);
-    this.router.delete("/:id", categoryController.deleteCategory);
+    this.router.get("/", verifyToken, categoryController.getCategories);
+    this.router.get("/:id", verifyToken, categoryController.getCategoryById);
+    this.router.post("/", verifyToken, categoryController.createCategory);
+    this.router.put("/:id", verifyToken, categoryController.updateCategory);
+    this.router.delete("/:id", verifyToken, categoryController.deleteCategory);
   }
 }
 

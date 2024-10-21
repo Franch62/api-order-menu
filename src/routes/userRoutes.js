@@ -1,5 +1,7 @@
 const express = require("express");
+
 const userController = require("../controllers/userController");
+const verifyToken = require("../middlewares/authMiddleware");
 
 class userRoutes {
   constructor() {
@@ -8,11 +10,11 @@ class userRoutes {
   }
 
   setupRoutes() {
-    this.router.get("/", userController.getUsers);
-    this.router.get("/:id", userController.getUserById);
-    this.router.post("/", userController.createUser);
-    this.router.put("/:id", userController.updateUser);
-    this.router.delete("/:id", userController.deleteUser);
+    this.router.get("/", verifyToken, userController.getUsers);
+    this.router.get("/:id", verifyToken, userController.getUserById);
+    this.router.post("/", verifyToken, userController.createUser);
+    this.router.put("/:id", verifyToken, userController.updateUser);
+    this.router.delete("/:id", verifyToken, userController.deleteUser);
   }
 }
 
